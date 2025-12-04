@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Энергосбережение: Домашняя экономия</title>
+    <link rel="stylesheet" href="disine.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="welcome-screen" class="screen active">
+        <div class="welcome-container">
+            <h1><i class="fas fa-leaf"></i> ЭнергоСберегатель</h1>
+            <p class="subtitle">Помоги сэкономить энергию по всему дому!</p>
+            <div class="story-box">
+                <h2><i class="fas fa-home"></i> Выбери комнату для проверки:</h2>
+                <p class="story-text">Вы собираетесь уйти из дома по делам. Нужно пройти по всем комнатам и принять меры для экономии энергии, чтобы не тратить её впустую!</p>
+            </div>
+            
+            <div class="rooms-grid">
+                <div class="room-card" data-room="kitchen">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Кухня</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+                <div class="room-card" data-room="living">
+                    <i class="fas fa-couch"></i>
+                    <h3>Гостиная</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+                <div class="room-card" data-room="bedroom">
+                    <i class="fas fa-bed"></i>
+                    <h3>Спальня</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+                <div class="room-card" data-room="bathroom">
+                    <i class="fas fa-bath"></i>
+                    <h3>Ванная</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+                <div class="room-card" data-room="children">
+                    <i class="fas fa-child"></i>
+                    <h3>Детская</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+                <div class="room-card" data-room="hallway">
+                    <i class="fas fa-door-closed"></i>
+                    <h3>Прихожая</h3>
+                    <div class="stars">Звёзды: <span class="star-count">0/10</span></div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="total-progress"></div>
+                </div>
+                <p>Общий прогресс: <span id="total-stars">0</span>/60 звёзд</p>
+                <button id="hint-button" class="hint-btn"><i class="fas fa-lightbulb"></i> Подсказка</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <div class="game-header">
+            <button id="back-button" class="back-btn"><i class="fas fa-arrow-left"></i> Назад к комнатам</button>
+            <div class="room-title">
+                <h2 id="current-room-name">Кухня</h2>
+                <div class="room-stars">Звёзды в этой комнате: <span id="current-room-stars">0/10</span></div>
+            </div>
+            <div class="energy-counter">
+                <i class="fas fa-bolt"></i>
+                <span id="energy-saved">0</span> Вт сэкономлено
+            </div>
+        </div>
+        
+        <div class="game-container">
+            <div class="story-section">
+                <h3><i class="fas fa-info-circle"></i> Задание в комнате:</h3>
+                <p id="room-story">Вы уходите из дома. Найдите все места, где можно сэкономить энергию!</p>
+            </div>
+            
+            <div class="room-view" id="room-view">
+                <!-- Здесь будет отображаться комната с интерактивными элементами -->
+            </div>
+            
+            <div class="tasks-section">
+                <h3><i class="fas fa-tasks"></i> Что нужно сделать:</h3>
+                <div id="tasks-list">
+                    <!-- Список задач будет генерироваться здесь -->
+                </div>
+            </div>
+            
+            <div class="hint-section" id="hint-section">
+                <h3><i class="fas fa-lightbulb"></i> Подсказка:</h3>
+                <p id="hint-text">Нажмите кнопку "Подсказка", если не знаете, что делать дальше</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="win-screen" class="screen">
+        <div class="win-container">
+            <h1><i class="fas fa-trophy"></i> Поздравляем!</h1>
+            <p class="win-subtitle">Вы успешно сэкономили энергию во всём доме!</p>
+            
+            <div class="result-box">
+                <div class="result-item">
+                    <i class="fas fa-star"></i>
+                    <h3>Всего звёзд</h3>
+                    <p id="final-stars">60/60</p>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Энергии сэкономлено</h3>
+                    <p id="final-energy">0 Вт</p>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-coins"></i>
+                    <h3>Деньги сохранены</h3>
+                    <p id="final-money">0 руб</p>
+                </div>
+            </div>
+            
+            <p class="win-message">Теперь вы можете спокойно идти по делам, зная что не тратите энергию впустую!</p>
+            
+            <div class="celebration">
+                <i class="fas fa-home"></i>
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-leaf"></i>
+            </div>
+            
+            <button id="play-again" class="action-btn">Играть снова</button>
+        </div>
+    </div>
+
+    <script src="play.js"></script>
+</body>
+</html>

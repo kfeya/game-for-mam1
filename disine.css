@@ -1,0 +1,997 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Welcome Screen */
+.welcome-container {
+    padding: 40px;
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 2.8rem;
+}
+
+h1 i {
+    color: #27ae60;
+    margin-right: 15px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+}
+
+.story-box {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 40px;
+    border-left: 5px solid #3498db;
+}
+
+.story-box h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.story-box h2 i {
+    margin-right: 10px;
+    color: #3498db;
+}
+
+.story-text {
+    color: #34495e;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.room-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+}
+
+.room-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: #3498db;
+}
+
+.room-card i {
+    font-size: 3rem;
+    color: #3498db;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.room-card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.room-card .stars {
+    background-color: #f1c40f;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.room-card.completed {
+    border-color: #27ae60;
+    background-color: #f0f9f0;
+}
+
+.room-card.completed i {
+    color: #27ae60;
+}
+
+.room-card.completed .stars {
+    background-color: #27ae60;
+}
+
+.progress-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+}
+
+.progress-bar {
+    height: 25px;
+    background-color: #ecf0f1;
+    border-radius: 12px;
+    margin: 20px auto;
+    overflow: hidden;
+    max-width: 600px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    width: 0%;
+    transition: width 0.5s ease;
+    border-radius: 12px;
+}
+
+.hint-btn {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.hint-btn:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
+}
+
+.hint-btn i {
+    margin-right: 8px;
+}
+
+/* Game Screen */
+.game-header {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.back-btn i {
+    margin-right: 8px;
+}
+
+.room-title h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.room-stars {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.energy-counter {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.energy-counter i {
+    margin-right: 8px;
+    color: #f1c40f;
+}
+
+.game-container {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.story-section, .tasks-section, .hint-section {
+    grid-column: span 2;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+.story-section h3, .tasks-section h3, .hint-section h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.story-section h3 i, .tasks-section h3 i, .hint-section h3 i {
+    margin-right: 10px;
+}
+
+.hint-section {
+    background-color: #fff8e1;
+    border-left: 5px solid #f39c12;
+}
+
+.room-view {
+    grid-column: span 2;
+    min-height: 400px;
+    background-color: #f0f7ff;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    border: 2px dashed #3498db;
+}
+
+.interactive-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 180px;
+    border: 2px solid #e0e0e0;
+}
+
+.interactive-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.interactive-item i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.interactive-item h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.interactive-item p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.interactive-item.solved {
+    border-color: #27ae60;
+    background-color: #f0f9f0;
+}
+
+.interactive-item.solved i {
+    color: #27ae60;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border-left: 4px solid #3498db;
+}
+
+.task-item.completed {
+    border-left-color: #27ae60;
+    background-color: #f0f9f0;
+}
+
+.task-icon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: #3498db;
+}
+
+.task-item.completed .task-icon {
+    color: #27ae60;
+}
+
+.task-text {
+    flex-grow: 1;
+}
+
+.task-stars {
+    background-color: #f1c40f;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Win Screen */
+.win-container {
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.win-subtitle {
+    color: #7f8c8d;
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+}
+
+.result-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.result-item {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px 20px;
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.result-item i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.result-item:nth-child(1) i { color: #f1c40f; }
+.result-item:nth-child(2) i { color: #3498db; }
+.result-item:nth-child(3) i { color: #2ecc71; }
+
+.result-item h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.result-item p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #34495e;
+}
+
+.win-message {
+    font-size: 1.2rem;
+    color: #34495e;
+    max-width: 800px;
+    margin: 30px auto;
+    line-height: 1.6;
+}
+
+.celebration {
+    font-size: 4rem;
+    color: #f1c40f;
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.action-btn {
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .rooms-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .game-container {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .result-box {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .rooms-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .welcome-container, .game-container {
+        padding: 20px;
+    }
+}
+/* Цветные фоны для комнат */
+.room-card[data-room="kitchen"] {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-color: #ff9966;
+}
+
+.room-card[data-room="living"] {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    border-color: #6a89cc;
+}
+
+.room-card[data-room="bedroom"] {
+    background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+    border-color: #d4a5a5;
+}
+
+.room-card[data-room="bathroom"] {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    border-color: #4facfe;
+}
+
+.room-card[data-room="children"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    border-color: #ff9a9e;
+}
+
+.room-card[data-room="hallway"] {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-color: #84fab0;
+}
+
+/* Улучшение контраста текста */
+.room-card h3 {
+    color: #2c3e50;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* Цвет иконок комнат */
+.room-card[data-room="kitchen"] i {
+    color: #e67e22;
+}
+
+.room-card[data-room="living"] i {
+    color: #3498db;
+}
+
+.room-card[data-room="bedroom"] i {
+    color: #9b59b6;
+}
+
+.room-card[data-room="bathroom"] i {
+    color: #1abc9c;
+}
+
+.room-card[data-room="children"] i {
+    color: #e74c3c;
+}
+
+.room-card[data-room="hallway"] i {
+    color: #34495e;
+}
+
+/* Звёзды на цветном фоне */
+.room-card .stars {
+    background-color: rgba(241, 196, 15, 0.9);
+    color: #7d6608;
+    font-weight: bold;
+    border: 2px solid #f1c40f;
+}
+
+.room-card.completed .stars {
+    background-color: rgba(39, 174, 96, 0.9);
+    color: white;
+    border-color: #27ae60;
+}
+
+/* Эффект при наведении */
+.room-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Тень для текста на цветном фоне */
+.room-card .star-count {
+    font-weight: bold;
+    color: #2c3e50;
+}
+/* Цветные карточки заданий в комнатах */
+.interactive-item[data-task-id="fridge"] {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-color: #4db6ac;
+}
+
+.interactive-item[data-task-id="stove"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    border-color: #e57373;
+}
+
+.interactive-item[data-task-id="kettle"] {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    border-color: #ffb74d;
+}
+
+.interactive-item[data-task-id="light"] {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    border-color: #ba68c8;
+}
+
+.interactive-item[data-task-id="window"] {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    border-color: #4fc3f7;
+}
+
+.interactive-item[data-task-id="faucet"] {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    border-color: #64b5f6;
+}
+
+/* Для гостиной */
+.interactive-item[data-task-id="tv"] {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-color: #ff8a65;
+}
+
+.interactive-item[data-task-id="gameconsole"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    border-color: #ff5252;
+}
+
+.interactive-item[data-task-id="lamp"] {
+    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    border-color: #ffb74d;
+}
+
+.interactive-item[data-task-id="charger"] {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border-color: #4db6ac;
+}
+
+.interactive-item[data-task-id="ac"] {
+    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+    border-color: #4fc3f7;
+}
+
+.interactive-item[data-task-id="curtains"] {
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    border-color: #9575cd;
+}
+
+/* Для спальни */
+.interactive-item[data-task-id="nightlight"] {
+    background: linear-gradient(135deg, #fff9c4 0%, #ffecb3 100%);
+    border-color: #ffd54f;
+}
+
+.interactive-item[data-task-id="heater"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    border-color: #e57373;
+}
+
+.interactive-item[data-task-id="laptop"] {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    border-color: #64b5f6;
+}
+
+.interactive-item[data-task-id="phone"] {
+    background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+    border-color: #9ccc65;
+}
+
+.interactive-item[data-task-id="radio"] {
+    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+    border-color: #ba68c8;
+}
+
+.interactive-item[data-task-id="blanket"] {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    border-color: #ff8a65;
+}
+
+/* Цвет иконок на карточках */
+.interactive-item i {
+    color: #2c3e50;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.interactive-item h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.interactive-item p {
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* Стиль для выполненных заданий */
+.interactive-item.solved {
+    background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+    border-color: #66bb6a;
+    position: relative;
+    overflow: hidden;
+}
+
+.interactive-item.solved::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #4caf50;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.interactive-item.solved i {
+    color: #388e3c;
+}
+
+.interactive-item.solved h4 {
+    color: #1b5e20;
+}
+
+.interactive-item.solved p {
+    color: #2e7d32;
+    font-weight: bold;
+}
+
+/* Эффект при наведении */
+.interactive-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+/* Стили для списка задач в правой панели */
+.task-item[data-task-id="fridge"] {
+    background: linear-gradient(90deg, #a8edea 0%, #fed6e3 100%);
+    border-left-color: #4db6ac;
+}
+
+.task-item[data-task-id="stove"] {
+    background: linear-gradient(90deg, #ff9a9e 0%, #fecfef 100%);
+    border-left-color: #e57373;
+}
+
+.task-item[data-task-id="kettle"] {
+    background: linear-gradient(90deg, #f6d365 0%, #fda085 100%);
+    border-left-color: #ffb74d;
+}
+
+/* и так для всех task-id... */
+
+.task-item.completed {
+    background: linear-gradient(90deg, #c8e6c9 0%, #a5d6a7 100%);
+    border-left-color: #66bb6a;
+}
+
+/* Цветные звёзды */
+.task-stars {
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+    color: #7d6608;
+    font-weight: bold;
+    border: 2px solid #f1c40f;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-item.completed .task-stars {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border-color: #27ae60;
+}
+
+/* Цвет иконок в списке задач */
+.task-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.task-item[data-task-id="fridge"] .task-icon {
+    background: linear-gradient(135deg, #4db6ac 0%, #00897b 100%);
+}
+
+.task-item[data-task-id="stove"] .task-icon {
+    background: linear-gradient(135deg, #e57373 0%, #d32f2f 100%);
+}
+
+.task-item[data-task-id="kettle"] .task-icon {
+    background: linear-gradient(135deg, #ffb74d 0%, #f57c00 100%);
+}
+
+/* Анимация при выполнении задания */
+@keyframes taskComplete {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.interactive-item.solved {
+    animation: taskComplete 0.5s ease;
+}
+/* Стили для неправильных предметов */
+.wrong-item {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    border-color: #bdc3c7;
+    opacity: 0.9;
+}
+
+.wrong-item i {
+    color: #95a5a6;
+}
+
+.wrong-item h4 {
+    color: #7f8c8d;
+}
+
+.wrong-item p {
+    color: #95a5a6;
+    font-size: 0.85rem;
+}
+
+/* Эффект при клике на неправильный предмет */
+.wrong-click {
+    animation: wrongShake 0.5s ease;
+    border-width: 3px;
+}
+
+@keyframes wrongShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+/* Подсказка для неправильного выбора */
+.wrong-feedback {
+    position: absolute;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    z-index: 100;
+    animation: fadeInOut 3s ease;
+    pointer-events: none;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* Счётчик ошибок */
+.error-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;
+}
+/* Добавьте в конец disine.css */
+
+/* Стили для цветных иконок */
+.interactive-item i[style*="color:"] {
+    font-size: 2.5rem !important;
+    margin-bottom: 15px !important;
+    display: block !important;
+}
+
+/* Улучшенные стили для интерактивных элементов */
+.interactive-item {
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для выполненных заданий с галочкой */
+.interactive-item.solved::after {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #4caf50;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 2;
+}
+
+/* Стили для специальных задач (которые не нужно трогать) */
+.interactive-item.special {
+    opacity: 0.7;
+    cursor: default !important;
+}
+
+.interactive-item.special:hover {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Улучшенные стили для списка задач */
+.task-item {
+    transition: all 0.3s ease;
+}
+
+.task-item:hover:not(.special) {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.task-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+/* Анимация для правильного выбора */
+@keyframes correctAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.interactive-item.solved {
+    animation: correctAnimation 0.5s ease;
+}
+
+/* Улучшенные стили для неправильных элементов */
+.wrong-item {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.wrong-item h4 {
+    color: #7f8c8d;
+}
+
+.wrong-item p {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* Эффект при наведении на кликабельные элементы */
+.interactive-item:not(.solved):not(.special):not(.wrong-item):hover,
+.wrong-item:hover {
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+/* Адаптивность для цветных элементов */
+@media (max-width: 768px) {
+    .interactive-item {
+        width: 160px;
+        min-height: 140px;
+        padding: 15px;
+    }
+    
+    .interactive-item i {
+        font-size: 2rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .interactive-item {
+        width: 140px;
+        min-height: 130px;
+        padding: 12px;
+    }
+    
+    .interactive-item i {
+        font-size: 1.8rem !important;
+    }
+}
